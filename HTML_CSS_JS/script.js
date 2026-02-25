@@ -24,24 +24,26 @@ cityInput.addEventListener('keypress', (enter) => {
 
 async function getCoordinates(city) {
     const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=pt&format=json`;
-    
+
     try {
         const response = await fetch(geoURL);
         const data = await response.json();
-        
+
+
         if (!data.results) {
             alert("Cidade não encontrada!");
             return;
         }
 
         const { latitude, longitude, name } = data.results[0];
-        
+
         const display = document.getElementById('displayCityName');
-        if(display) display.innerText = name;
-        
+        if (display) display.innerText = name;
+
+   
        
         fetchWeatherData(latitude, longitude);
-        
+
     } catch (error) {
         console.error("Erro na geocodificação:", error);
     }
@@ -49,17 +51,17 @@ async function getCoordinates(city) {
 
 
 async function fetchWeatherData(lat, lon) {
-   
+
     const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
 
     try {
         const response = await fetch(weatherURL);
         const data = await response.json();
-        
+
         const temp = data.current_weather.temperature;
         const code = data.current_weather.weathercode;
 
-   
+
         const weatherMap = {
             0: "Céu limpo ☀️",
             1: "Principalmente limpo 🌤️",
@@ -72,10 +74,12 @@ async function fetchWeatherData(lat, lon) {
             95: "Trovoada ⛈️"
         };
 
-      
+
         document.getElementById('temperature').innerText = `Temperatura: ${temp}°C`;
         document.getElementById('condition').innerText = `Condição: ${weatherMap[code] || "Desconhecida"}`;
-        
+        console.log(displayCityName);
+        console.log(temperature);
+        console.log(condition);
     } catch (error) {
         console.error("Erro ao buscar clima:", error);
     }
