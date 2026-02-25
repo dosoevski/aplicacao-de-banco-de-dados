@@ -9,6 +9,18 @@ searchBtn.addEventListener('click', () => {
         alert("Por favor, digite o nome de uma cidade.");
     }
 });
+cityInput.addEventListener('keypress', (enter) => {
+    const cityName = cityInput.value;
+    if (enter.key === 'Enter' && cityName) {
+        getCoordinates(cityName);
+        console.log(cityName);
+        console.log(displayCityName);
+        console.log(temperature);
+        console.log(condition);
+    } else if (enter.key === 'Enter') {
+        alert("Por favor, digite o nome de uma cidade.");
+    }
+});
 
 async function getCoordinates(city) {
     const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=pt&format=json`;
@@ -45,7 +57,7 @@ async function fetchWeatherData(lat, lon) {
         const data = await response.json();
         
         const temp = data.current_weather.temperature;
-        const code = data.current_weather.weathercode; // O código da condição
+        const code = data.current_weather.weathercode;
 
    
         const weatherMap = {
