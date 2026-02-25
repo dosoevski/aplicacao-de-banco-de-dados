@@ -23,11 +23,11 @@ async function getCoordinates(city) {
         }
 
         const { latitude, longitude, name } = data.results[0];
-        // Certifique-se que esse ID existe no seu HTML ou use o cityName.value
+        
         const display = document.getElementById('displayCityName');
         if(display) display.innerText = name;
         
-        // Chamamos a função passando apenas latitude e longitude
+       
         fetchWeatherData(latitude, longitude);
         
     } catch (error) {
@@ -35,9 +35,9 @@ async function getCoordinates(city) {
     }
 }
 
-// 3. Buscar o clima real e a CONDIÇÃO
+
 async function fetchWeatherData(lat, lon) {
-    // Note que adicionei current_weather=true para facilitar
+   
     const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
 
     try {
@@ -47,7 +47,7 @@ async function fetchWeatherData(lat, lon) {
         const temp = data.current_weather.temperature;
         const code = data.current_weather.weathercode; // O código da condição
 
-        // Tabela de tradução rápida
+   
         const weatherMap = {
             0: "Céu limpo ☀️",
             1: "Principalmente limpo 🌤️",
@@ -60,7 +60,7 @@ async function fetchWeatherData(lat, lon) {
             95: "Trovoada ⛈️"
         };
 
-        // Exibir na tela
+      
         document.getElementById('temperature').innerText = `Temperatura: ${temp}°C`;
         document.getElementById('condition').innerText = `Condição: ${weatherMap[code] || "Desconhecida"}`;
         
