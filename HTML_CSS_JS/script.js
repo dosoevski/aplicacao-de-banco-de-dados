@@ -77,9 +77,11 @@ async function fetchWeatherData(lat, lon) {
 
         document.getElementById('temperature').innerText = `Temperatura: ${temp}°C`;
         document.getElementById('condition').innerText = `Condição: ${weatherMap[code] || "Desconhecida"}`;
-        console.log(displayCityName);
-        console.log(temperature);
-        console.log(condition);
+         console.clear();
+        console.log(displayCityName.innerText);
+        console.log(temperature.innerText);
+        console.log(condition.innerText);
+       
     } catch (error) {
         console.error("Erro ao buscar clima:", error);
     }
